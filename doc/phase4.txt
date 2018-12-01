@@ -1,0 +1,162 @@
+Chris Padilla and Yasmeen Awad
+
+------
+Phase 4
+------
+
+CREATE TYPE main AS ENUM('turkey', 'tofurkey', 'ham/pork', 'turducken', 'roast beef', 'chicken', 'other', E'i don\'t know');
+CREATE TYPE method AS ENUM('baked', 'roasted', 'fried', 'other', E'i don\'t know');
+CREATE TYPE stuff AS ENUM('bread-based', 'rice-based', 'none', 'other');
+CREATE TYPE sauce AS ENUM('canned', 'homemade', 'none', 'other');
+
+CREATE TABLE main_food (
+
+    id BIGINT,
+    main_dish main,
+    cooked method,
+    stuffing stuff,
+    cranberry_sauce sauce,
+    gravy BOOLEAN
+
+);
+
+CREATE TABLE main_dish_other (
+
+    id BIGINT,
+    main_dish_other TEXT
+
+);
+
+
+CREATE TABLE cooked_other (
+
+    id BIGINT,
+    cooked_other TEXT
+);
+
+CREATE TABLE stuffing_other(
+
+    id BIGINT,
+    stuffing_other TEXT
+
+);
+
+CREATE TABLE cranberry_sauce_other (
+
+    id BIGINT,
+    cranberry_sauce_other TEXT
+
+);
+
+CREATE TYPE dish AS ENUM('brussel sprouts', 'carrots', 'cauliflower', 'corn', 'cornbread', 'fruit salad', 'green beans/green bean casserole', 'macaroni and cheese', 'mashed potatoes', 'rolls/biscuits', 'vegetable salad', 'yams/sweet potato casserole', 'squash', 'other');
+
+CREATE TABLE side_dish (
+
+    id BIGINT,
+    side dish
+
+);
+
+CREATE TABLE side_dish_other (
+
+    id BIGINT,
+    side_dish_other TEXT
+
+);
+
+CREATE TYPE flavor AS ENUM('apple', 'buttermilk', 'cherry', 'chocolate', 'coconut cream', 'key lime', 'peach', 'pecan', 'pumpkin', 'sweet potato', 'none', 'other');
+
+CREATE TABLE pie (
+
+    id BIGINT,
+    pie_type flavor
+
+);
+
+CREATE TABLE pie_other (
+
+    id BIGINT,
+    pie_other TEXT
+);
+
+
+CREATE TYPE sweet AS ENUM('apple cobbler', 'blondies', 'brownies', 'carrot cake', 'cheesecake', 'cookies', 'fudge', 'ice cream', 'peach cobbler', 'none', 'other');
+
+
+CREATE TABLE dessert (
+
+    id BIGINT,
+    dessert_type sweet
+
+);
+
+CREATE TABLE dessert_other (
+
+    id BIGINT,
+    dessert_other TEXT
+);
+
+CREATE TYPE place AS ENUM('west north central', 'southeast', 'middle atlantic', 'east south central', 'mountain', 'east north central', 'new england', 'south atlantic', 'west south central', 'pacific', '');
+CREATE TYPE dist AS ENUM('home', 'local', 'near', 'far', '');
+CREATE TYPE density AS ENUM('rural', 'suburban', 'urban', '');
+CREATE TYPE agegroup AS ENUM('18 - 29', '30 - 44', '45 - 59', '60+', '');
+CREATE TYPE sex AS ENUM('male', 'female', '');
+CREATE TYPE wealth AS ENUM('"$0 to $9,999"', '"$10,000 to $24,999"', '"$25,000 to $49,999"', '"$50,000 to $74,999"', '"$75,000 to $99,999"', '"$100,000 to $124,999"', '"$125,000 to $149,999"', '"$150,000 to $174,999"', '"$175,000 to $199,999"', '"$200,000 and up"', 'prefer not to answer', '');
+
+
+
+CREATE TABLE demographics (
+
+    id BIGINT,
+    region place,
+    pray BOOLEAN,
+    travel dist,
+    macys_parade BOOLEAN,
+    age_cutoff INT,
+    friendsgiving BOOLEAN,
+    black_friday_shop BOOLEAN,
+    work_retail BOOLEAN,
+    work_black_friday BOOLEAN,
+    population_density density,
+    age agegroup,
+    gender sex,
+    income TEXT
+
+);
+
+--------------------------------------------------------------------------------
+
+
+SYNOPSIS: Get the statistics of the data of interest grouped by the demographic.
+
+QUERY (GET): /home?demographic=<demographic_arg>&interest=<interest_arg>/
+
+RESPONSE: A dictionary of dictionaries: The main dictionary maps the
+demographic to the interest data about the demographic, which is a dictionary.
+Each interest data dictionary maps the categories to percentages of the
+demographic that fit the category.
+
+EXAMPLE: http://perlman.mathcs.carleton.edu/map?demographic=region&interest=main_dish/
+
+{'Pacific': {'turkey': .90, 'ham': .05, 'tofurkey': .03, 'pork': .01, 'other': .01},
+'West North Central': {'turkey': .89, 'ham': .06, 'tofurkey': 0, 'pork': .03, 'other': .03},
+'Southeast': {'turkey': .99, 'ham': 0, 'tofurkey': .01, 'pork': 0, 'other': 0}}
+
+-------
+
+SYNOPSIS: Get the Thanksgiving survey response of a random respondant with a random name
+(random name will come from a call to randomapi.com).
+
+QUERY (GET): /random/
+
+RESPONSE: A dictionary of a single respondant's response to the Thanksgiving survey, including
+the main dish they serve, the type of cranberry sauce they use, etc.
+
+EXAMPLE: http://perlman.mathcs.carleton.edu/random/
+
+{'main_dish': 'Tofurkey', 'cranberry_sauce': 'Canned', 'cooked': 'Deep fried',
+'stuffing': 'Bread-based', 'side_dish': 'Mac and cheese', 'dessert': 'pie', 'pie': 'pecan',
+'pray': 0, 'region': 'Mountain', 'income': 'Prefer not to say', 'travel': 'local',
+'shop_black_friday': 1, 'work_retail': 0, 'shop_black_friday': 0, 'celebrate': 1,
+'gravy': 1, 'population_density': 'suburban', 'gender': 'female', 'age': '18-29',
+'friendsgiving': 0, 'age_cutoff': 21}

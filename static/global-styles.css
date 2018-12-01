@@ -1,0 +1,166 @@
+/*Global style sheet for Thanksgiving website*/
+
+:root {
+  --brown: #3a260b;
+  --maroon: #6e352c;
+  --scarlet: #cf5230;
+  --orange: #f59a44;
+  --beige: #e3c598;
+  --taupe: #8a6e64;
+  font-family: Verdana, Geneva, sans-sans-serif;
+}
+
+
+body {
+  background-image: url(background-image.jpg);
+}
+
+
+header {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  background-color: var(--beige);
+  border: 3px solid var(--maroon);
+}
+
+h1 {
+  color: var(--brown);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  color: var(--brown);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#nav-button-group {
+  visibility: hidden;
+  display: flex;
+  flex-direction: row;
+  height: auto;
+}
+
+.navigation {
+  background-color: var(--beige);
+  font-weight: bolder;
+  border: none;
+  border-left: .5px groove var(--taupe);
+  height: 100%;
+}
+
+hr {
+  padding: 10px;
+  border: none;
+}
+
+#demographic-button-group {
+  float: left;
+  width: 26%;
+}
+
+
+.demographic-button {
+  background-color: var(--beige);
+  color:black;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  border: 2px solid var(--maroon);
+  border-radius: 2px;
+  display:block;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  width: 90%;
+  font-size: 18px
+}
+
+.demographic-button:hover {
+  background-color: var(--maroon);
+  color: white;
+}
+
+#main-content {
+  float: left;
+  background-color: var(--beige);
+  border: 1px solid var(--maroon);
+}
+
+#story-block {
+  float: left;
+  background-color: var(--beige);
+  border: 1px solid var(--maroon);
+  width: 50%;
+}
+
+#story {
+  padding: 20px 20px;
+}
+
+#data-vis-div {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: none;
+}
+/*
+#data-image {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: none;
+}
+*/
+
+.js-plotly-plot {
+  visibility: hidden;
+  border: 1px solid var(--maroon);
+  /*float: none;*/
+  top: 100%;
+  left: 100%;
+  position: absolute;
+}
+
+
+#interest-button-block {
+  display: grid;
+  grid-template-columns: 1fr 80px minmax(200px,500px) 80px 1fr;
+}
+
+#interest-button-block > * {
+  background-color: transparent;
+  outline: none;
+  font-size: 24px;
+  border: none;
+  transition-duration: .4s;
+}
+
+#interest-button-block > #left_arrow {
+  grid-column: 1/-4;
+}
+
+#left_arrow:hover {
+  background-color: var(--maroon);
+  color: white;
+}
+
+#interest-button-block > #selected-interest-button {
+  grid-column: 3/-3;
+  border-left: 2px solid var(--maroon);
+  border-right: 2px solid var(--maroon);
+}
+
+#interest-button-block > #right_arrow {
+  grid-column: 4/-1;
+}
+
+#right_arrow:hover {
+  background-color: var(--maroon);
+  color: white;
+}
+
+#interest-button-list {
+  visibility: hidden;
+}
